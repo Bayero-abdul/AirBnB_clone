@@ -11,11 +11,11 @@ The console is a project which is based on the creation of a data model which al
 ## How to Run the console
 
 the console should work like this in interactive mode:
-``
+```
 $ ./console.py
 (hbnb) help
 
-###Documented commands (type help <topic>):
+###### Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
 
@@ -23,15 +23,15 @@ EOF  help  quit
 (hbnb) 
 (hbnb) quit
 $
-``
+```
 
 But also in non-interactive mode:
 
-``
+```
 $ echo "help" | ./console.py
 (hbnb)
 
-###Documented commands (type help <topic>):
+######Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
 (hbnb) 
@@ -47,6 +47,6 @@ $ cat test_help | ./console.py
 EOF  help  quit
 (hbnb) 
 $
-``
+```
 
-# Complete it later
+# Complete it..... in progress
