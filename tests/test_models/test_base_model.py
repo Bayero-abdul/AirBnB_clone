@@ -72,6 +72,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(my_model_1.id != self.my_model.id)
     
     #more tests to come
+    def test_check_attrs(self):
+        """Test if main BaseModel attributes are in kwargs."""
+        pass
 
 if __name__ == "__main__":
     unittest.main()
