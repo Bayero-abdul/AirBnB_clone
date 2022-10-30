@@ -6,9 +6,8 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpreter"""
+
     prompt = '(hbnb) '
-    def do_EOF(self, arg):
-        """end of file i.e ctrl+d"""
 
     def do_EOF(self, arg):
         """EOF(end of file) i.e Ctrl+D"""
