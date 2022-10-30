@@ -24,5 +24,5 @@ class HBNBCommand(cmd.Cmd):
         """Ignores when empty line or ENTER is being pressed"""
         pass
 
-if __name__ == '__main__':
+if  __name__ == '__main__':
     HBNBCommand().cmdloop()
