@@ -19,8 +19,8 @@ class BaseModel:
 
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             storage.new(self)
 
     def set_attributes(self, kwargs):
@@ -37,8 +37,8 @@ class BaseModel:
 
     def save(self):
         """Updates the updated_at date."""
+        self.updated_at = datetime.now()
         storage.save()
-        #self.updated_at = datetime.utcnow()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of \
