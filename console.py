@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-"""this module contains the entry point of the command interpreter"""
+"""this module contains the entry point of the command interpreter.
+"""
 
 import cmd
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpreter"""
-
     prompt = '(hbnb) '
-   
+    def do_EOF(self, arg):
+        """end of file i.e ctrl+d"""
 
     def do_EOF(self, arg):
         """EOF(end of file) i.e Ctrl+D"""
@@ -20,10 +21,8 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         exit()
 
-
     def emptyline(self):
-        """Method called when an empty line is entered in \
-response to the prompt"""
+        """Ignores when empty line or ENTER is being pressed"""
         pass
 
 if  __name__ == '__main__':
