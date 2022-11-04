@@ -31,7 +31,7 @@ class BaseModel:
 
     def __str__(self):
         """string representaion of the instances."""
-        copy = dict(self.__dict__)
+        copy = self.__dict__
         if type(copy['created_at']) is str:
             copy['created_at'] = datetime.fromisoformat(copy['created_at'])
         if type(copy['updated_at']) is str:
