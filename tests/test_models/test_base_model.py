@@ -13,7 +13,7 @@ class TestBaseModel(unittest.TestCase):
 
     def setUp(self):
         """factors the set-up code."""
-        self.my_model = BaseModel(None)
+        self.my_model = BaseModel()
         self.my_model.name = "My First Model"
         self.my_model.my_number = 89
 
@@ -56,16 +56,19 @@ class TestBaseModel(unittest.TestCase):
 
     def test_to_dict_output(self):
         """Test to_dict output."""
-        my_model_json = self.my_model.to_dict()
-        example = {
-                '__class__': 'BaseModel',
-                'updated_at': self.my_model.updated_at,
-                'created_at': self.my_model.created_at,
-                'my_number': 89,
-                'name': 'My First Model',
-                'id': self.my_model.id
+        b = BaseModel()
+        dt = datetime.now()
+        b.id = "12345"
+        b.created_at = b.updated_at = dt
+        test_dict = {
+            'id': "12345",
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat(),
+            '__class__': 'BaseModel'
         }
-        self.assertEqual(my_model_json, example)
+        self.assertDictEqual(test_dict, b.to_dict()) 
+
+
 
     def test_uniqueid(self):
         """Test if id of different instances is different."""
