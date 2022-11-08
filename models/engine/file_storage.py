@@ -26,10 +26,11 @@ JSON file to instances."""
 
     def save(self):
         """serializes __objects to the JSON file"""
-        with open(self.__file_path, "w", encoding="utf-8") as f:
+        with open(type(self).__file_path, "w", encoding="utf-8") as f:
+            store_dict = {}
             for key, value in type(self).__objects.items():
-                type(self).__objects[key] = value.to_dict()
-            f.write(json.dumps(type(self).__objects))
+                store_dict[key] = value.to_dict()
+            f.write(json.dumps(store_dict))
 
     def reload(self):
         """deserializes the JSON file to __objects"""
