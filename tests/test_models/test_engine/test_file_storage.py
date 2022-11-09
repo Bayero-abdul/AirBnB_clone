@@ -4,6 +4,7 @@
 
 import unittest
 import os
+import json
 from datetime import datetime
 from models import storage
 from models.base_model import BaseModel
@@ -33,7 +34,6 @@ class TestFileStorage(unittest.TestCase):
     def test_IsFileStorage(self):
         """test for instances of FileStorage."""
         self.assertIsInstance(FileStorage(), FileStorage)
-
 
     def test_has_file_path_attr(self):
         """test if private class attribute __file_path
@@ -75,8 +75,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(dir(my_model) == dir(BaseModel()))
 
         with self.assertRaises(AttributeError):
-            diff_types = [1, 'string', [34, 6], {'hello': 7}, (3, 6), True, None]
-            for diff_type in diff_types:
+            types = [1, 'string', [34, 6], {'hello': 7}, (3, 6), True, None]
+            for t in types:
                 self.fs.new(diff_type)
 
         with self.assertRaises(TypeError):
@@ -95,6 +95,27 @@ class TestFileStorage(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             self.fs.save(1)
+
+    def test_reload(self):
+        """test for reload()."""
+        self.assertTrue(hasattr(self.fs, 'reload'))
+        my_model = BaseModel()
+        my_model.save()
+        test_dict = {}
+        with open('file.json', 'r', encoding='utf-8') as f:
+            read = json.loads(f.read())
+            for key, value in read.items():
+                test_dict[key] = BaseModel(**value).to_dict()
+
+        self.fs.reload()
+        store_dict = {}
+        for key, value in self.fs._FileStorage__objects.items():
+            store_dict[key] = value.to_dict()
+
+        self.assertTrue(test_dict == store_dict)
+
+        with self.assertRaises(TypeError):
+            self.fs.reload(None)
 
 
 if __name__ == "__main__":
