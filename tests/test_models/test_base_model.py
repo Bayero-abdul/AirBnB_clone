@@ -12,7 +12,7 @@ class TestBaseModel(unittest.TestCase):
     """TestCase for the BaseModel Class."""
 
     def setUp(self):
-        """factors the set-up code."""
+        """the set-up code."""
         self.my_model = BaseModel()
         self.my_model.name = "My First Model"
         self.my_model.my_number = 89
@@ -66,18 +66,12 @@ class TestBaseModel(unittest.TestCase):
             'updated_at': dt.isoformat(),
             '__class__': 'BaseModel'
         }
-        self.assertDictEqual(test_dict, b.to_dict()) 
-
-
+        self.assertDictEqual(test_dict, b.to_dict())
 
     def test_uniqueid(self):
         """Test if id of different instances is different."""
         my_model_1 = BaseModel()
         self.assertTrue(my_model_1.id != self.my_model.id)
-
-    def test_check_attrs(self):
-        """Test if main BaseModel attributes are in kwargs."""
-        pass
 
 
 if __name__ == "__main__":
