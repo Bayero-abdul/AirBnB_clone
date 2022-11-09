@@ -3,6 +3,7 @@
 Test for the base_model.py.
 """
 
+import os
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
@@ -38,6 +39,8 @@ class TestBaseModel(unittest.TestCase):
         updated_at_before_save = self.my_model.updated_at
         self.my_model.save()
         self.assertTrue(updated_at_before_save != self.my_model.updated_at)
+
+        self.assertTrue(os.path.exists('file.json'))
 
     def test_to_dict(self):
         """Test if to_dict() returns a dictionary."""
