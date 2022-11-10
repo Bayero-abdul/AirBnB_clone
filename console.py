@@ -102,9 +102,9 @@ adding or updating attribute."""
                     attr = args[2]
                     value = args[3]
                     if attr in instances[inst].__dict__:
-                        instances[inst].attr = value
+                        setattr(instances[inst], attr, value)
                     else:
-                        instances[inst].attr = value
+                        setattr(instances[inst], attr, value)
                     instances[inst].save()
             else:
                 self.default("** no instance found **")
