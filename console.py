@@ -64,6 +64,7 @@ based on the class name and id."""
             instances = storage.all()
             if instance in instances:
                 del instances[instance]
+                storage.save()
             else:
                 self.default("** no instance found **")
 
