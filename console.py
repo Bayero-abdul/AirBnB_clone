@@ -9,7 +9,8 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-hbnb_classes = {'BaseModel': BaseModel}
+hbnb_classes = {'BaseModel': BaseModel,
+                'User': User}
 
 
 class HBNBCommand(cmd.Cmd):

@@ -35,8 +35,10 @@ JSON file to instances."""
     def reload(self):
         """deserializes the JSON file to __objects"""
         from models.base_model import BaseModel
+        from models.user import User
+
         if os.path.exists(self.__file_path):
             with open(type(self).__file_path, "r", encoding="utf-8") as f:
                 read = json.loads(f.read())
                 for key, value in read.items():
-                    type(self).__objects[key] = BaseModel(**value)
+                    type(self).__objects[key] = eval(value['__class__'])(**value)
