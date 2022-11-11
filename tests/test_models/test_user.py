@@ -11,9 +11,8 @@ from models.user import User
 
 class TestUser(unittest.TestCase):
     """TestCase for the User Class."""
-    
-    @classmethod
-    def setUpClass(self):
+
+    def setUp(self):
         """the set-up code."""
         self.my_user = User()
         self.my_user.first_name = "Betty"
@@ -21,8 +20,7 @@ class TestUser(unittest.TestCase):
         self.my_user.email = "airbnb@mail.com"
         self.my_user.password = "root"
 
-    @classmethod
-    def tearDownClass(self):
+    def tearDown(self):
         """tears down the setup code."""
         if (os.path.exists('file.json')):
             os.remove('file.json')
