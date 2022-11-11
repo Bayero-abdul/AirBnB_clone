@@ -15,11 +15,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
         """the set-up code."""
         self.my_user = User()
-        self.my_user.first_name = "Betty"
-        self.my_user.last_name = "Bar"
-        self.my_user.email = "airbnb@mail.com"
-        self.my_user.password = "root"
-
+    
     def tearDown(self):
         """tears down the setup code."""
         if (os.path.exists('file.json')):
@@ -41,19 +37,24 @@ class TestUser(unittest.TestCase):
         """test if updated_at is of datetime type"""
         self.assertIs(type(self.my_user.updated_at), datetime)
 
-    def test_public_cls_attr_first_name(self):
+    def test_firstname_attr(self):
         """test if first name is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'first_name'))
+        self.assertTrue(self.my_user.first_name == '')
+        self.my_user.first_name = 'abdul'
+        self.assertTrue(self.my_user.first_name == 'abdul')
+        self.assertIs(type(self.my_user.first_name), str)
 
-    def test_public_cls_attr_last_name(self):
+    def test_lastname_attr(self):
         """test if last name is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'last_name'))
 
-    def test_public_cls_attr_email(self):
+
+    def test__email_attr(self):
         """test if email is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'email'))
 
-    def test_public_cls_attr_password(self):
+    def test_password_attr(self):
         """test if password is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'password'))
     
