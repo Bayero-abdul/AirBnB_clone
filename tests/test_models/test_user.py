@@ -7,19 +7,25 @@ import os
 import unittest
 from datetime import datetime
 from models.user import User
-from models.base_model import BaseModel
 
 
 class TestUser(unittest.TestCase):
     """TestCase for the User Class."""
-
-    def setUp(self):
+    
+    @classmethod
+    def setUpClass(self):
         """the set-up code."""
         self.my_user = User()
         self.my_user.first_name = "Betty"
         self.my_user.last_name = "Bar"
         self.my_user.email = "airbnb@mail.com"
         self.my_user.password = "root"
+
+    @classmethod
+    def tearDownClass(self):
+        """tears down the setup code."""
+        if (os.path.exists('file.json')):
+            os.remove('file.json')
 
     def test_isUser(self):
         """test for instances of User"""
@@ -52,6 +58,14 @@ class TestUser(unittest.TestCase):
     def test_public_cls_attr_password(self):
         """test if password is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'password'))
+    
+    def test_types_public_cls_attr(self):
+        """test if the public class attributes values \
+are strings.:"""
+        self.assertIs(type(self.my_user.first_name), str)
+        self.assertIs(type(self.my_user.last_name), str)
+        self.assertIs(type(self.my_user.email), str)
+        self.assertIs(type(self.my_user.password), str)
 
     def test_save(self):
         """test the save() method."""
@@ -88,11 +102,19 @@ class TestUser(unittest.TestCase):
         dt = datetime.now()
         u.id = "12345"
         u.created_at = u.updated_at = dt
+        u.first_name = "Betty"
+        u.last_name = "Bar"
+        u.email = "airbnb@mail.com"
+        u.password = "root"
         test_dict = {
             'id': "12345",
             'created_at': dt.isoformat(),
             'updated_at': dt.isoformat(),
-            '__class__': 'User'
+            '__class__': 'User',
+            'first_name': "Betty",
+            'last_name': "Bar",
+            'email': "airbnb@mail.com",
+            'password': "root"
         }
         self.assertDictEqual(test_dict, u.to_dict())
 
