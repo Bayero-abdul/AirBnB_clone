@@ -30,8 +30,9 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel, save it and \
-print id."""
+        """Creates a new instance of BaseModel, save it and
+        print id."""
+
         if not arg:
             self.default("** class name missing **")
         elif arg not in hbnb_classes:
@@ -42,8 +43,9 @@ print id."""
             print(model.id)
 
     def do_show(self, line):
-        """Prints the string representation of an instance \
-based on the class name and id."""
+        """Prints the string representation of an instance
+        based on the class name and id."""
+
         args = line.split()
         if len(args) < 1:
             self.default("** class name missing **")
@@ -63,6 +65,7 @@ based on the class name and id."""
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id."""
+
         args = line.split()
         if len(args) < 1:
             self.default("** class name missing **")
@@ -83,6 +86,7 @@ based on the class name and id."""
 
     def do_all(self, arg):
         """prints the list of all objects stored."""
+
         if arg and arg not in hbnb_classes:
             self.default("** class doesn't exist **")
         elif not arg:
@@ -93,8 +97,9 @@ based on the class name and id."""
             print([str(objs[k]) for k in objs if k.split('.')[0] == arg])
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by\
-adding or updating attribute."""
+        """Updates an instance based on the class name and id by
+        adding or updating attribute."""
+
         args = line.split()
         if len(args) < 1:
             self.default("** class name missing **")
@@ -125,19 +130,43 @@ adding or updating attribute."""
 
     def do_EOF(self, arg):
         """EOF(end of file) i.e Ctrl+D"""
+
         return True
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
+
         return True
 
+    def parseline(self, line):
+        """Parse the line into a command name and a string containing
+        the arguments.  Returns a tuple containing (command, args, line).
+        'command' and 'args' may be None if the line couldn't be parsed."""
+
+        parsed_tup = cmd.Cmd.parseline(self, line)
+        tmp = parsed_tup[-1].split('.')
+        if len(tmp) == 2:
+            command = tmp[1]
+            if command[-2:] != '()':
+                return parsed_tup
+            command = tmp[1].split('(')[0]
+            cls = tmp[0]
+            line = command + ' ' + cls
+            parsed_tup = cmd.Cmd.parseline(self, line)
+        return parsed_tup
+
     def emptyline(self):
-        """Ignores when empty line or ENTER is being pressed"""
+        """Ignores when empty line or ENTER is being entered"""
+
         pass
 
-    def default(self, msg):
-        """print a message."""
-        print(msg)
+    def default(self, line):
+        """Called on an input line when the command prefix is not recognized.
+
+        If this method is not overridden, it prints an error message and
+        returns."""
+
+        print(line)
 
 
 if __name__ == '__main__':
