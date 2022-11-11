@@ -77,7 +77,7 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(AttributeError):
             types = [1, 'string', [34, 6], {'hello': 7}, (3, 6), True, None]
             for t in types:
-                self.fs.new(diff_type)
+                self.fs.new(t)
 
         with self.assertRaises(TypeError):
             storage.new(my_model, 45)
