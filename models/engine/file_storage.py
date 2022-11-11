@@ -40,5 +40,5 @@ JSON file to instances."""
         if os.path.exists(self.__file_path):
             with open(type(self).__file_path, "r", encoding="utf-8") as f:
                 read = json.loads(f.read())
-                for key, value in read.items():
-                    type(self).__objects[key] = eval(value['__class__'])(**value)
+                for k, val in read.items():
+                    type(self).__objects[k] = eval(val['__class__'])(**val)
