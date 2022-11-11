@@ -128,6 +128,12 @@ class HBNBCommand(cmd.Cmd):
             else:
                 self.default("** no instance found **")
 
+    def do_count(self, arg):
+        """counts the number of instances a class has."""
+
+        objs = storage.all()
+        print(len([objs[k] for k in objs if k.split('.')[0] == arg]))
+
     def do_EOF(self, arg):
         """EOF(end of file) i.e Ctrl+D"""
 
