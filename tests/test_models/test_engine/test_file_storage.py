@@ -14,10 +14,6 @@ from models.engine.file_storage import FileStorage
 class TestFileStorage(unittest.TestCase):
     """Tests for the FileStorage class."""
 
-    # setUp and tearDown function reference:
-    # https://github.com/betascribbles/AirBnB_clone/blob/
-    # main/tests/test_models/test_engine/test_file_storage.py
-
     @classmethod
     def setUpClass(self):
         """Code to execute before testing occurs"""

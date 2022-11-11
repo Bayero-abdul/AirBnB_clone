@@ -59,7 +59,7 @@ class TestUser(unittest.TestCase):
 
     def test_types_public_cls_attr(self):
         """test if the public class attributes values \
-are strings.:"""
+        are strings."""
         self.assertIs(type(self.my_user.first_name), str)
         self.assertIs(type(self.my_user.last_name), str)
         self.assertIs(type(self.my_user.email), str)
