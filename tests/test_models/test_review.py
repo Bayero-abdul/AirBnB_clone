@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """Test module for the `Review class`.
 """
@@ -18,7 +17,7 @@ class TestReview(unittest.TestCase):
     def test_instance(self):
         """test for instances."""
         self.assertTrue(isinstance(self.my_review, Review))
-    
+
     def test_issubclass_BaseModel(self):
         """tests if Review is a subclass of BaseModel."""
         self.assertTrue(issubclass(type(self.my_review), BaseModel))
@@ -37,3 +36,7 @@ class TestReview(unittest.TestCase):
         """test for public attribute `text`."""
         self.assertTrue(hasattr(self.my_review, 'text'))
         self.assertTrue(self.my_review.text == '')
+
+
+if __name__ == "__main__":
+    unittest.main()

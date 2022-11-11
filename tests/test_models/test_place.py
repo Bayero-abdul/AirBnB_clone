@@ -17,7 +17,7 @@ class TestReview(unittest.TestCase):
     def test_instance(self):
         """test for instances."""
         self.assertTrue(isinstance(self.my_place, Place))
-    
+
     def test_issubclass_BaseModel(self):
         """tests if Place is a subclass of BaseModel."""
         self.assertTrue(issubclass(type(self.my_place), BaseModel))
@@ -87,3 +87,7 @@ class TestReview(unittest.TestCase):
         self.assertTrue(hasattr(self.my_place, 'amenity_ids'))
         self.assertTrue(self.my_place.amenity_ids == [])
         self.assertEqual(type(self.my_place.amenity_ids), list)
+
+
+if __name__ == "__main__":
+    unittest.main()

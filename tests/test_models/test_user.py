@@ -15,7 +15,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
         """the set-up code."""
         self.my_user = User()
-    
+
     def tearDown(self):
         """tears down the setup code."""
         if (os.path.exists('file.json')):
@@ -49,7 +49,6 @@ class TestUser(unittest.TestCase):
         """test if last name is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'last_name'))
 
-
     def test__email_attr(self):
         """test if email is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'email'))
@@ -57,7 +56,7 @@ class TestUser(unittest.TestCase):
     def test_password_attr(self):
         """test if password is a public class attribute."""
         self.assertTrue(hasattr(self.my_user, 'password'))
-    
+
     def test_types_public_cls_attr(self):
         """test if the public class attributes values \
 are strings.:"""
