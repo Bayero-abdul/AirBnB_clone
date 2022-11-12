@@ -159,7 +159,22 @@ class HBNBCommand(cmd.Cmd):
             inst = cmd_inst[1]
             cls = tmp[0]
             if len(inst) > 1:
-                line = command + ' ' + cls + ' ' + inst[1:-2]
+                if command == 'update':
+                    arg = inst.split(', ')
+                    if len(arg) == 1:
+                        Id = arg[0].replace('"', '')
+                        line = f'{command} {cls} {Id}'
+                    elif len(arg) == 2:
+                        Id = arg[0].replace('"', '')
+                        attr = arg[1].replace('"', '')
+                        line = f'{command} {cls} {Id} {attr[:-1]}'
+                    else:
+                        Id = arg[0].replace('"', '')
+                        attr = arg[1].replace('"', '')
+                        val = arg[2].replace('"', '')
+                        line = f'{command} {cls} {Id} {attr} {val[:-1]}'
+                else:
+                    line = command + ' ' + cls + ' ' + inst[1:-2]
             else:
                 line = command + ' ' + cls
             parsed_tup = cmd.Cmd.parseline(self, line)
