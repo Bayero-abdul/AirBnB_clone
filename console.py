@@ -27,6 +27,7 @@ hbnb_classes = {'BaseModel': BaseModel,
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpreter"""
+
     prompt = '(hbnb) '
 
     def do_create(self, arg):
@@ -115,16 +116,25 @@ class HBNBCommand(cmd.Cmd):
             if inst in instances:
                 if len(args) < 3:
                     self.default("** attribute name missing **")
-                elif len(args) < 4:
-                    self.default("** value missing **")
-                else:
-                    attr = args[2]
-                    value = args[3]
-                    if attr in instances[inst].__dict__:
-                        setattr(instances[inst], attr, value)
+                
+                """if dictionary of attrs is passed."""
+                try:
+                    if type(eval(args[2].replace("|", ' '))) is dict:
+                        dict_attrs = eval(args[2].replace("|", ' '))
+                        for attr, value in dict_attrs.items():
+                            setattr(instances[inst], attr, value)
+                        instances[inst].save()
+                except NameError:
+                    if len(args) < 4:
+                        self.default("** value missing **")
                     else:
-                        setattr(instances[inst], attr, value)
-                    instances[inst].save()
+                        attr = args[2]
+                        value = args[3]
+                        if attr in instances[inst].__dict__:
+                            setattr(instances[inst], attr, value)
+                        else:
+                            setattr(instances[inst], attr, value)
+                        instances[inst].save()
             else:
                 self.default("** no instance found **")
 
@@ -160,6 +170,15 @@ class HBNBCommand(cmd.Cmd):
             cls = tmp[0]
             if len(inst) > 1:
                 if command == 'update':
+                    arg = inst.split('{')
+
+                    """if dictionary of attrs is passed."""
+                    if len(arg) == 2:
+                        Id = arg[0][:-2].replace('"', '')
+                        attrs = '{' + arg[1][:-1].replace(" ", '|')
+                        line = f'{command} {cls} {Id} {attrs}'
+                        return cmd.Cmd.parseline(self, line)
+
                     arg = inst.split(', ')
                     if len(arg) == 1:
                         Id = arg[0].replace('"', '')
@@ -174,9 +193,9 @@ class HBNBCommand(cmd.Cmd):
                         val = arg[2].replace('"', '')
                         line = f'{command} {cls} {Id} {attr} {val[:-1]}'
                 else:
-                    line = command + ' ' + cls + ' ' + inst[1:-2]
+                    line = f'{command} {cls} {inst[1:-2]}'
             else:
-                line = command + ' ' + cls
+                line = f'{command} {cls}'
             parsed_tup = cmd.Cmd.parseline(self, line)
         return parsed_tup
 
