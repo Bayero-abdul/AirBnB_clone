@@ -152,12 +152,16 @@ class HBNBCommand(cmd.Cmd):
         parsed_tup = cmd.Cmd.parseline(self, line)
         tmp = parsed_tup[-1].split('.')
         if len(tmp) == 2:
-            command = tmp[1]
-            if command[-2:] != '()':
+            cmd_inst = tmp[1].split('(')
+            if len(cmd_inst) < 2:
                 return parsed_tup
-            command = tmp[1].split('(')[0]
+            command = cmd_inst[0]
+            inst = cmd_inst[1]
             cls = tmp[0]
-            line = command + ' ' + cls
+            if len(inst) > 1:
+                line = command + ' ' + cls + ' ' + inst[1:-2]
+            else:
+                line = command + ' ' + cls
             parsed_tup = cmd.Cmd.parseline(self, line)
         return parsed_tup
 
