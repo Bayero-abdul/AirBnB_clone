@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-Test for the user class.
+"""Test for the user class.
 """
 
 import os
@@ -14,31 +13,38 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         """the set-up code."""
+
         self.my_user = User()
 
     def tearDown(self):
         """tears down the setup code."""
+
         if (os.path.exists('file.json')):
             os.remove('file.json')
 
     def test_isUser(self):
         """test for instances of User"""
+
         self.assertIs(type(self.my_user), User)
 
     def test_idtype(self):
         """test if id is of string type."""
+
         self.assertIs(type(self.my_user.id), str)
 
     def test_typecreated_at(self):
         """test if created_at is of datetime type"""
+
         self.assertIs(type(self.my_user.created_at), datetime)
 
     def test_typeupdated_at(self):
         """test if updated_at is of datetime type"""
+
         self.assertIs(type(self.my_user.updated_at), datetime)
 
     def test_firstname_attr(self):
         """test if first name is a public class attribute."""
+
         self.assertTrue(hasattr(self.my_user, 'first_name'))
         self.assertTrue(self.my_user.first_name == '')
         self.my_user.first_name = 'abdul'
@@ -47,19 +53,23 @@ class TestUser(unittest.TestCase):
 
     def test_lastname_attr(self):
         """test if last name is a public class attribute."""
+
         self.assertTrue(hasattr(self.my_user, 'last_name'))
 
     def test__email_attr(self):
         """test if email is a public class attribute."""
+
         self.assertTrue(hasattr(self.my_user, 'email'))
 
     def test_password_attr(self):
         """test if password is a public class attribute."""
+
         self.assertTrue(hasattr(self.my_user, 'password'))
 
     def test_types_public_cls_attr(self):
-        """test if the public class attributes values \
+        """test if the public class attributes values
         are strings."""
+
         self.assertIs(type(self.my_user.first_name), str)
         self.assertIs(type(self.my_user.last_name), str)
         self.assertIs(type(self.my_user.email), str)
@@ -67,6 +77,7 @@ class TestUser(unittest.TestCase):
 
     def test_save(self):
         """test the save() method."""
+
         updated_at_before_save = self.my_user.updated_at
         self.my_user.save()
         self.assertTrue(updated_at_before_save != self.my_user.updated_at)
@@ -78,6 +89,7 @@ class TestUser(unittest.TestCase):
 
     def test_to_dict(self):
         """Test if to_dict() returns a dictionary."""
+
         my_user_json = self.my_user.to_dict()
         self.assertIs(type(my_user_json), dict)
 
@@ -86,16 +98,19 @@ class TestUser(unittest.TestCase):
 
     def test__str__(self):
         """Test for the string representation."""
+
         self.assertEqual(str(self.my_user), "[User] ({}) {}"
                          .format(self.my_user.id, self.my_user.__dict__))
 
     def test_to_dict_has_class_attr(self):
         """Test if to_dict() has __class__ attribute."""
+
         my_user_json = self.my_user.to_dict()
         self.assertTrue(hasattr(my_user_json, '__class__'))
 
     def test_to_dict_output(self):
         """Test to_dict output."""
+
         u = User()
         dt = datetime.now()
         u.id = "12345"
@@ -118,6 +133,7 @@ class TestUser(unittest.TestCase):
 
     def test_uniqueid(self):
         """Test if id of different instances is different."""
+
         my_user_1 = User()
         self.assertTrue(my_user_1.id != self.my_user.id)
 

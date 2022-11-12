@@ -17,11 +17,13 @@ class TestFileStorage(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         """Code to execute before testing occurs"""
+
         self.fs = FileStorage()
 
     @classmethod
     def tearDownClass(self):
         """Code to execute after tests are executed"""
+
         if os.path.exists("file.json"):
             os.remove("file.json")
 
@@ -29,12 +31,13 @@ class TestFileStorage(unittest.TestCase):
 
     def test_IsFileStorage(self):
         """test for instances of FileStorage."""
+
         self.assertIsInstance(FileStorage(), FileStorage)
 
     def test_has_file_path_attr(self):
         """test if private class attribute __file_path
-        exits.
-        """
+        exits."""
+
         self.assertTrue(hasattr(FileStorage(), '_FileStorage__file_path'))
         self.assertFalse(hasattr(FileStorage(), '__file_path'))
 
@@ -42,8 +45,8 @@ class TestFileStorage(unittest.TestCase):
             self.fs._FileStorage__file_path()
 
     def test_has_objects_attr(self):
-        """test if private class attribute __objects exists.
-        """
+        """test if private class attribute __objects exists."""
+
         self.assertTrue(hasattr(FileStorage(), '_FileStorage__objects'))
         self.assertFalse(hasattr(FileStorage(), '__objects'))
         self.assertIs(type(self.fs._FileStorage__objects), dict)
@@ -54,16 +57,17 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all(self):
         """test if all() returns a dictionary"""
+
         self.assertTrue(hasattr(self.fs, 'all'))
         self.assertIsInstance(self.fs.all(), dict)
         self.assertTrue(self.fs._FileStorage__objects == {})
 
-        # test for arg passed
         with self.assertRaises(TypeError):
             self.fs.all(None)
 
     def test_new(self):
         """test for new() function."""
+
         self.assertTrue(hasattr(self.fs, 'new'))
 
         my_model = BaseModel()
@@ -80,6 +84,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """test for save() function."""
+
         my_model = BaseModel()
         b_updated_at = my_model.updated_at
         my_model.save()
@@ -94,6 +99,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """test for reload()."""
+
         self.assertTrue(hasattr(self.fs, 'reload'))
         my_model = BaseModel()
         my_model.save()

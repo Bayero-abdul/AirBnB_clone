@@ -12,18 +12,22 @@ class TestState(unittest.TestCase):
 
     def setUp(self):
         """setup code."""
+
         self.my_state = State()
 
     def test_instance(self):
         """test for instances."""
+
         self.assertTrue(isinstance(self.my_state, State))
 
     def test_issubclass_BaseModel(self):
         """tests if State is a subclass of BaseModel."""
+
         self.assertTrue(issubclass(type(self.my_state), BaseModel))
 
     def test_name_attr(self):
         """test for public attribute `name`."""
+
         self.assertTrue(hasattr(self.my_state, 'name'))
         self.assertTrue(self.my_state.name == '')
 
